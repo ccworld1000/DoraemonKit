@@ -51,10 +51,7 @@ static NSString *DoraemonHomeCloseCellID = @"DoraemonHomeCloseCellID";
 #if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
     }
 #endif
-    NSMutableArray *dataArray = [[DoraemonCacheManager sharedInstance] kitShowManagerData];
-    if (ARRAY_IS_NULL(dataArray)) {
-        dataArray = [DoraemonManager shareInstance].dataArray;
-    }
+    NSMutableArray *dataArray = [[DoraemonCacheManager sharedInstance] allKitShowManagerData];
     _dataArray = dataArray;
     [self.view addSubview:self.collectionView];
     
@@ -73,7 +70,7 @@ static NSString *DoraemonHomeCloseCellID = @"DoraemonHomeCloseCellID";
 }
 
 - (void)kitManagerUpdate:(NSNotification *)aNotification {
-    _dataArray = [[DoraemonCacheManager sharedInstance] kitShowManagerData];
+    _dataArray = [[DoraemonCacheManager sharedInstance] allKitShowManagerData];
     [self.collectionView reloadData];
 }
 

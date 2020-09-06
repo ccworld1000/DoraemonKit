@@ -297,6 +297,7 @@ typedef void (^DoraemonPerformanceBlock)(NSDictionary *);
     [self addPluginWithTitle:model.title icon:model.icon desc:model.desc pluginName:model.pluginName atModule:model.atModule buriedPoint:model.buriedPoint];
 }
 
+// out 1
 - (void)addPluginWithTitle:(NSString *)title icon:(NSString *)iconName desc:(NSString *)desc pluginName:(NSString *)entryName atModule:(NSString *)moduleName{
     [self addPluginWithTitle:title icon:iconName desc:desc pluginName:entryName atModule:moduleName buriedPoint:@"dokit_sdk_business_ck"];
 }
@@ -313,6 +314,7 @@ typedef void (^DoraemonPerformanceBlock)(NSDictionary *);
     pluginDic[@"show"] = @1;
 }
 
+// out 2
 - (void)addPluginWithTitle:(NSString *)title icon:(NSString *)iconName desc:(NSString *)desc pluginName:(NSString *)entryName atModule:(NSString *)moduleName handle:(void (^)(NSDictionary *))handleBlock
 {
     NSMutableDictionary *pluginDic = [self foundGroupWithModule:moduleName];
@@ -392,6 +394,9 @@ typedef void (^DoraemonPerformanceBlock)(NSDictionary *);
 }
 
 - (BOOL)isShowDoraemon{
+    if (!_entryWindow) {
+        return NO;
+    }
     return !_entryWindow.hidden;
 }
 
@@ -418,6 +423,10 @@ typedef void (^DoraemonPerformanceBlock)(NSDictionary *);
 
 - (void)addPerformanceBlock:(void(^)(NSDictionary *performanceDic))block{
     self.performanceBlock = block;
+}
+
+- (void)addWebpHandleBlock:(UIImage *(^)(NSString *filePath))block{
+    self.webpHandleBlock = block;
 }
 
 - (void)hiddenHomeWindow{
